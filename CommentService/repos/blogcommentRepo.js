@@ -31,8 +31,9 @@ class BlogCommentRepo{
             let result = await BlogComment.findOneAndUpdate(filter,update,{new : true});
             if (result==null){
                 throw 'Het bericht is niet geplaatst!'
+            } else {
+                console.log(`Comment has been saved for blogpost: ${value.blogpostUsername}`);
             }
-            console.log(`Comment has been saved for blogpost: ${value.blogpostUsername}`);
         }catch(e){
             console.warn(`Comment failed for blogpost: ${value.blogpostUsername}`);
             throw `Throwed in update: ${e}`;
