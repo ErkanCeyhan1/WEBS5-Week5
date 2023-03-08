@@ -1,6 +1,6 @@
 const express = require('express');
 const http = require('http');
-const proxy = require('axios-express-proxy');
+const axios = require('axios-express-proxy');
 
 const BLOGSERVICE = 'http://localhost:3015';
 const COMMENTSERVICE = 'http://localhost:3014';
@@ -17,7 +17,8 @@ const options = {
 };
 
 
-const breaker = new CircuitBreaker(proxy.Proxy, options);
+const breaker = new CircuitBreaker(axios.Proxy, options);
+
 breaker.fallback(() => 'Sorry, out of service right now');
 breaker.on('fallback', (result) => { 
     console.log('Circuit-breaker fallback: ', result)
